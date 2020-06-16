@@ -1,7 +1,7 @@
 /* ---------------------
    ------ MIXINS ------
    -------------------- */
-@mixin animate($name, $from: true) {
+@mixin animate($name, $params, $from: true) {
   @keyframes #{$name} {
     @if $from {
       from {
@@ -11,6 +11,8 @@
       @content;
     }
   }
+
+  animation: $name $params;
 }
 
 @mixin abs($top, $right, $bottom: auto, $left: auto) {

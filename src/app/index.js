@@ -6,7 +6,7 @@ import "./styles/main.scss"
 function App() {
   return (
     <div>
-      <Palette palette={seedColors[3]} />
+      <Palette palette={seedColors[8]} />
     </div>
   )
 }

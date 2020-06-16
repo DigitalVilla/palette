@@ -4,8 +4,6 @@ import SelectColumns from "../../components/SelectColumns"
 import ToggleButton from "../../components/ToggleButton"
 
 function Palette({ palette }) {
-  const copyToClipboard = () => {}
-
   const [displayName, setDisplayName] = useState(true)
   const [columns, setColumns] = useState(0)
 
@@ -22,7 +20,6 @@ function Palette({ palette }) {
       <main className="palette-colors">
         <PaletteColors
           columns={columns}
-          onClick={copyToClipboard}
           colors={palette.colors}
           display={displayName ? "name" : "code"}
         />

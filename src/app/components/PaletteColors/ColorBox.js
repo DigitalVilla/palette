@@ -1,14 +1,28 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import "./ColorBox.scss"
 
-function ColorBox({ code, name, onClick }) {
+function ColorBox({ code, name }) {
   const [colorName, setColorName] = useState(name)
+  const [isCopied, setIsCopied] = useState(false)
   const colorInput = useRef(null)
+  const timeId = useRef(0)
 
-  const handleClick = (e) => {
+  useEffect(() => {
+    if (isCopied) {
+      console.log("isCopied")
+
+      clearTimeout(timeId.current)
+      timeId.current = setTimeout(() => {
+        setIsCopied(false)
+      }, 600)
+    }
+    return () => clearTimeout(timeId.current)
+  }, [isCopied])
+
+  const copyToClipboard = (e) => {
     colorInput.current.select()
     document.execCommand("copy")
-    onClick()
+    setIsCopied(true)
   }
   const handleHold = (e) => {
     if (e.type === "mousedown") {
@@ -25,11 +39,10 @@ function ColorBox({ code, name, onClick }) {
           type="button"
           className="copy-btn"
           aria-label="copy color"
-          onClick={handleClick}
+          onClick={copyToClipboard}
         >
           <span>Copy</span>
         </button>
-        <input className="hidden" type="text" ref={colorInput} value={code} />
         <div className="controls">
           <button
             className="color-title"
@@ -50,6 +63,19 @@ function ColorBox({ code, name, onClick }) {
             More
           </button>
         </div>
+        <div
+          className={`copy-overlay ${isCopied && "show"}`}
+          aria-hidden="true"
+        >
+          <h2 style={{ background: code }}>Copied!</h2>
+        </div>
+        <input
+          className="hidden"
+          aria-hidden="true"
+          type="text"
+          ref={colorInput}
+          value={code}
+        />
       </div>
     </li>
   )
