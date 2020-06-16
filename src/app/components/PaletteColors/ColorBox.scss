@@ -4,25 +4,26 @@
   --height: 100px;
   --copy-height: 65%;
   --off-padding: 6;
-  --background: rgba(255, 255, 255, 0.322);
+  --background: rgba(255, 255, 255, 0.3);
 
-  height: var(--height);
   display: flex;
   flex-direction: column;
-
-  .view-name,
-  .view-color {
-    display: none;
-  }
+  height: var(--height);
 
   .copy-btn {
     font-size: var(--font-sm);
     flex-basis: var(--copy-height);
     padding-top: calc(var(--height) / var(--off-padding));
+    opacity: 0;
+    transition: 0.4s;
 
     span {
       background: var(--background);
-      padding: 0.5rem 2rem;
+      padding: 0.3rem 1.2rem;
+    }
+
+    &:hover {
+      opacity: 1;
     }
   }
 
@@ -35,7 +36,7 @@
   button {
     height: 100%;
     text-transform: capitalize;
-    font-size: var(--font-sm);
+    font-size: var(--font-xs);
   }
 
   .controls {

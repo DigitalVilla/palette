@@ -1,8 +1,6 @@
 @import "../../styles/grid";
 
 .palette {
-  @extend .sp-grid;
-
   &.display-name {
     .name {
       display: inline-block !important;
@@ -13,8 +11,12 @@
       display: inline-block !important;
     }
   }
+}
 
-  li {
-    @extend .sp-cell;
+.cell {
+  @extend .sp-cell;
+  .content {
+    border: 2px solid #f0c !important;
+    padding: var(--space-xl);
   }
 }

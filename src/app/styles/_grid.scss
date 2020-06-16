@@ -1,9 +1,7 @@
-@import "../../styles/media";
+@import "./media";
 
-$maxSplits: 6;
-$maxAutoSplits: 6;
-
-$mediaScreens: false, xs, sm, md, lg, xl;
+// Auto cell sizes
+$maxAutoCells: 5;
 $autoSizes: (
   2: sm,
   3: md,
@@ -11,6 +9,10 @@ $autoSizes: (
   5: lg2,
   6: xl2,
 );
+
+// Custom cell sizes
+$mediaSize: (false, xs, sm, md, lg, xl);
+$maxCells: 6;
 
 .sp-grid {
   --columns: 4;
@@ -29,6 +31,10 @@ $autoSizes: (
     }
   }
 
+  &.animate .sp-cell {
+    transition: flex-basis 0.2s ease-out;
+  }
+
   &.grow {
     .sp-cell {
       flex-grow: 1 !important;
@@ -36,12 +42,13 @@ $autoSizes: (
   }
 
   &.auto,
+  &.cell-0,
   &.cell-auto {
     .sp-cell {
       flex-basis: 100%;
       flex-grow: 0;
 
-      @for $i from 2 through $maxAutoSplits {
+      @for $i from 2 through $maxAutoCells {
         $media: map-get($autoSizes, $i);
         @include mediaUp($media) {
           flex-basis: calc(100% / #{$i});
@@ -50,8 +57,8 @@ $autoSizes: (
     }
   }
 
-  @each $media in $mediaScreens {
-    @for $i from 1 through $maxSplits {
+  @each $media in $mediaSize {
+    @for $i from 1 through $maxCells {
       @if $media {
         &.#{$media}-#{$i},
         &.cell-#{$media}-#{$i} {
@@ -86,8 +93,8 @@ $autoSizes: (
     flex-grow: 1 !important;
   }
 
-  @each $media in $mediaScreens {
-    @for $i from 1 through $maxSplits {
+  @each $media in $mediaSize {
+    @for $i from 1 through $maxCells {
       @if $media {
         &.#{$media}-#{$i},
         &.cell-#{$media}-#{$i} {
