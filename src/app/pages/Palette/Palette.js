@@ -1,10 +1,10 @@
 import React, { useState } from "react"
 import PaletteColors from "../../components/PaletteColors"
-import ColumnSelect from "../../components/ColumnSelect"
+import SelectColumns from "../../components/SelectColumns"
 import ToggleButton from "../../components/ToggleButton"
 
 function Palette({ palette }) {
-  console.log("Palette =>")
+  const copyToClipboard = () => {}
 
   const [displayName, setDisplayName] = useState(true)
   const [columns, setColumns] = useState(0)
@@ -16,12 +16,13 @@ function Palette({ palette }) {
           displayName={displayName}
           setDisplayName={setDisplayName}
         />
-        <ColumnSelect setColumns={setColumns} columns={columns} />
+        <SelectColumns setColumns={setColumns} columns={columns} />
       </header>
 
       <main className="palette-colors">
         <PaletteColors
           columns={columns}
+          onClick={copyToClipboard}
           colors={palette.colors}
           display={displayName ? "name" : "code"}
         />

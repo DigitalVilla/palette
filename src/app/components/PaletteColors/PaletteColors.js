@@ -2,21 +2,19 @@ import React, { memo } from "react"
 import ColorBox from "./ColorBox"
 import "./PaletteColors.scss"
 
-export default memo(function PaletteColors({ columns, colors, display }) {
-  console.log("PaletteColors => M", display)
-
+const PaletteColors = memo(function ({ columns, colors, display, onClick }) {
   return (
     <ul
-      className={`palette no-gutter
+      className={`palette sp-grid no-gutter
       display-${display || "name"}
       cell-${columns || "auto"} `}
     >
-      <ColorBoxes colors={colors} />
+      <ColorBoxes colors={colors} onClick={onClick} />
     </ul>
   )
 })
 
-const ColorBoxes = memo(function ColorBoxes({ colors }) {
+const ColorBoxes = memo(function ColorBoxes({ colors, onClick }) {
   return (
     <>
       {colors.length &&
@@ -24,11 +22,14 @@ const ColorBoxes = memo(function ColorBoxes({ colors }) {
           return (
             <ColorBox
               key={`${i}-${color}`}
-              color={color.toUpperCase()}
+              code={color.toUpperCase()}
               name={name}
+              onClick={onClick}
             />
           )
         })}
     </>
   )
 })
+
+export default PaletteColors

@@ -1,24 +1,35 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import "./ColorBox.scss"
 
-export default function ColorBox({ color, name }) {
-  console.log("ColorBox => ")
+function ColorBox({ code, name, onClick }) {
   const [colorName, setColorName] = useState(name)
+  const colorInput = useRef(null)
 
+  const handleClick = (e) => {
+    colorInput.current.select()
+    document.execCommand("copy")
+    onClick()
+  }
   const handleHold = (e) => {
     if (e.type === "mousedown") {
-      setColorName(color)
+      setColorName(code)
     } else if (colorName !== name) {
       setColorName(name)
     }
   }
 
   return (
-    <li>
-      <div className="color-box" style={{ background: color }}>
-        <button type="button" className="copy-btn" aria-label="copy color">
-          <span>Copied</span>
+    <li className="sp-cell">
+      <div className="color-box" style={{ background: code }}>
+        <button
+          type="button"
+          className="copy-btn"
+          aria-label="copy color"
+          onClick={handleClick}
+        >
+          <span>Copy</span>
         </button>
+        <input className="hidden" type="text" ref={colorInput} value={code} />
         <div className="controls">
           <button
             className="color-title"
@@ -32,7 +43,7 @@ export default function ColorBox({ color, name }) {
               {colorName}
             </span>
             <span aria-hidden="true" className="code">
-              {colorName === name ? color : name}
+              {colorName === name ? code : name}
             </span>
           </button>
           <button className="more-btn" type="button">
@@ -44,4 +55,4 @@ export default function ColorBox({ color, name }) {
   )
 }
 
-// export default ColorBox
+export default ColorBox
