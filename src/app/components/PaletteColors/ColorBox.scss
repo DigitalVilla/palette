@@ -1,0 +1,63 @@
+@import "../../styles/media";
+
+.color-box {
+  --height: 100px;
+  --copy-height: 65%;
+  --off-padding: 6;
+  --background: rgba(255, 255, 255, 0.322);
+
+  height: var(--height);
+  display: flex;
+  flex-direction: column;
+
+  .view-name,
+  .view-color {
+    display: none;
+  }
+
+  .copy-btn {
+    font-size: var(--font-sm);
+    flex-basis: var(--copy-height);
+    padding-top: calc(var(--height) / var(--off-padding));
+
+    span {
+      background: var(--background);
+      padding: 0.5rem 2rem;
+    }
+  }
+
+  @include mediaUp(md) {
+    --height: 200px;
+    --copy-height: 88%;
+    --off-padding: 9;
+  }
+
+  button {
+    height: 100%;
+    text-transform: capitalize;
+    font-size: var(--font-sm);
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-basis: calc(100% - var(--copy-height));
+
+    .color-title {
+      padding-left: 10px;
+      flex: 1;
+      text-align: left;
+
+      .code,
+      .name {
+        display: none;
+      }
+    }
+
+    .more-btn {
+      padding: 0 2rem;
+      background: var(--background);
+    }
+  }
+}

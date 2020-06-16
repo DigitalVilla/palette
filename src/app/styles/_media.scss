@@ -1,0 +1,68 @@
+$breakpoints: (
+  xxs: 320px,
+  xs: 360px,
+  sm: 560px,
+  md: 768px,
+  md2: 992px,
+  md3: 1024px,
+  lg: 1200px,
+  lg2: 1400px,
+  xl: 1600px,
+  xl2: 1920px,
+);
+
+// Mobile first approach
+@mixin mediaUp($breakpoint, $landscape: false) {
+  $screen: $breakpoint;
+
+  @if map-has-key($breakpoints, $breakpoint) {
+    $screen: map-get($breakpoints, $breakpoint);
+  }
+
+  @if $landscape {
+    @media (min-width: $screen) and (orientation: landscape) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $screen) {
+      @content;
+    }
+  }
+}
+
+// Desktop first approach
+@mixin mediaDown($breakpoint, $landscape: false) {
+  $screen: $breakpoint;
+
+  @if map-has-key($breakpoints, $breakpoint) {
+    $screen: map-get($breakpoints, $breakpoint);
+  }
+
+  @if $landscape {
+    @media (max-width: $screen - 1px) and (orientation: landscape) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $screen - 1px) {
+      @content;
+    }
+  }
+}
+
+// Container first approach
+@mixin mediaBetween($lower, $upper) {
+  $lower-breakpoint: $lower;
+  $upper-breakpoint: $upper;
+
+  @if map-has-key($breakpoints, $lower) {
+    $lower-breakpoint: map-get($breakpoints, $lower);
+  }
+
+  @if map-has-key($breakpoints, $upper) {
+    $upper-breakpoint: map-get($breakpoints, $upper);
+  }
+
+  @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+    @content;
+  }
+}

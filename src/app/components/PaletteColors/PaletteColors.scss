@@ -1,0 +1,20 @@
+@import "../../styles/grid";
+
+.palette {
+  @extend .sp-grid;
+
+  &.display-name {
+    .name {
+      display: inline-block !important;
+    }
+  }
+  &.display-code {
+    .code {
+      display: inline-block !important;
+    }
+  }
+
+  li {
+    @extend .sp-cell;
+  }
+}
