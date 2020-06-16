@@ -1,8 +1,9 @@
 import React, { memo, useEffect, useRef } from "react"
-import useMedia from "../hooks/useMedia"
+import useMedia from "../../hooks/useMedia"
+import "./SelectColumns.scss"
 
-export default memo(function ColumnSelect({ setColumns, columns }) {
-  console.log("ColumnSelect => M")
+export default memo(function SelectColumns({ setColumns, columns }) {
+  // console.log("ColumnSelect => M")
   const store = useRef(0)
   const maxColumns = useMedia(
     [{ "1600": 6 }, { "1400": 5 }, { "1024": 4 }, { "768": 3 }, { "568": 2 }],
