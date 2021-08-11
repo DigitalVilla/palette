@@ -11,6 +11,18 @@
   flex-direction: column;
   height: var(--height);
 
+  @include mediaUp(md) {
+    --height: 200px;
+    --copy-height: 88%;
+    --off-padding: 9;
+  }
+
+  button {
+    height: 100%;
+    text-transform: capitalize;
+    font-size: var(--font-sm);
+  }
+
   .copy-btn {
     font-size: var(--font-sm);
     flex-basis: var(--copy-height);
@@ -27,19 +39,7 @@
     }
   }
 
-  @include mediaUp(md) {
-    --height: 200px;
-    --copy-height: 88%;
-    --off-padding: 9;
-  }
-
-  button {
-    height: 100%;
-    text-transform: capitalize;
-    font-size: var(--font-sm);
-  }
-
-  .controls {
+  .btn-controls {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -61,39 +61,39 @@
       background: var(--background);
     }
   }
-}
 
-.copy-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  z-index: 0;
-  width: 0;
-  height: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-md);
-  color: white;
+  .copy-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 0;
+    width: 0;
+    height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font);
+    color: white;
 
-  h2 {
-    margin-top: -0.4rem;
-    text-align: center;
-    text-shadow: 1px 1px black;
-    font-weight: 400;
-  }
+    h2 {
+      margin-top: -0.4rem;
+      text-align: center;
+      text-shadow: 1px 1px black;
+      font-weight: 400;
+    }
 
-  &.show {
-    z-index: 1;
-    width: 100%;
-    height: 100%;
+    &.show {
+      z-index: 1;
+      width: 100%;
+      height: 100%;
 
-    @include animate("fadeOut", (0.6s ease-out), false) {
-      40%,
-      70% {
-        transform: scale(1.15);
-        opacity: 1;
+      @include animate("fadeOut", (0.6s ease-out), false) {
+        40%,
+        70% {
+          transform: scale(1.15);
+          opacity: 1;
+        }
       }
     }
   }

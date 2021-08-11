@@ -7,6 +7,9 @@ function ColorBox({ code, name }) {
   const colorInput = useRef(null)
   const timeId = useRef(0)
 
+  const textColor =
+    parseInt(code.replace("#", ""), 16) > 0xffffff / 2.5 ? "#272F41" : "#fff"
+
   useEffect(() => {
     if (isCopied) {
       console.log("isCopied")
@@ -41,9 +44,9 @@ function ColorBox({ code, name }) {
           aria-label="copy color"
           onClick={copyToClipboard}
         >
-          <span>Copy</span>
+          <span style={{ color: textColor }}>Copy</span>
         </button>
-        <div className="controls">
+        <div className="btn-controls">
           <button
             className="color-title"
             type="button"

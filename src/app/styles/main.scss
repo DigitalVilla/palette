@@ -1,5 +1,40 @@
-@import "./variables";
-@import "./mixins";
-@import "./grid";
-@import "./base";
-@import "./global";
+// @import "./variables";
+@import "./media";
+// @import "./mixins";
+// @import "./grid";
+// @import "./base";
+// @import "./global";
+
+.item {
+  height: 300px;
+  color: white;
+  border-radius: 4px;
+  background-image: linear-gradient(#007dd1, #0066ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
+
+  @include mediaUp(md) {
+    height: 320px;
+  }
+}
+
+.sp-cell {
+  // border: 1px solid #f0c !important;
+}
+footer,
+header {
+  color: white;
+  padding: 2rem;
+}
+
+.app {
+  .footer,
+  .header {
+    background-image: linear-gradient(to bottom left, #007dd1, #0066ff);
+    height: 100%;
+    min-height: 100px;
+  }
+}

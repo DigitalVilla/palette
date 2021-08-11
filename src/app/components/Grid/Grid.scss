@@ -1,40 +1,93 @@
-@import "./media";
+@import "../../styles/variables";
+@import "../../styles/media";
+
+// Custom cell sizes
+$maxCells: 12;
+$mediaSize: (false, xs, sm, md, md3, lg, lg2, xl, xl2);
 
 // Auto cell sizes
-$maxAutoCells: 5;
+$maxAutoCells: 6;
 $autoSizes: (
   2: sm,
   3: md,
   4: md3,
   5: lg2,
-  6: xl2,
+  6: xl,
 );
-
-// Custom cell sizes
-$mediaSize: (false, xs, sm, md, lg, xl);
-$maxCells: 6;
 
 .sp-grid {
   --columns: 4;
   --gutter: 1vw;
-  --gutter-horizontal: var(--gutter);
-  --gutter-vertical: var(--gutter);
+  --bleed: 1vw;
 
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
-  padding: var(--gutter-vertical) var(--gutter-horizontal);
+  padding: var(--bleed) var(--bleed);
 
+  * {
+    box-sizing: border-box;
+  }
+
+  &.no-gaps {
+    --gutter: 0;
+    --bleed: 0;
+  }
+
+  &.bleed-0,
+  &.no-bleed {
+    --bleed: 0;
+  }
+
+  &.bleed-1 {
+    --bleed: var(--space-sm);
+  }
+  &.bleed-2 {
+    --bleed: var(--space);
+  }
+  &.bleed-3 {
+    --bleed: var(--space-md);
+  }
+  &.bleed-4 {
+    --bleed: var(--space-lg);
+  }
+  &.bleed-5 {
+    --bleed: var(--space-xl);
+  }
+  &.bleed-6 {
+    --bleed: var(--space-xxl);
+  }
+
+  &.gutter-0,
   &.no-gutter {
     --gutter: 0;
   }
 
-  &.animate .sp-cell {
+  &.gutter-1 {
+    --gutter: var(--space-sm);
+  }
+  &.gutter-2 {
+    --gutter: var(--space);
+  }
+  &.gutter-3 {
+    --gutter: var(--space-md);
+  }
+  &.gutter-4 {
+    --gutter: var(--space-lg);
+  }
+  &.gutter-5 {
+    --gutter: var(--space-xl);
+  }
+  &.gutter-6 {
+    --gutter: var(--space-xxl);
+  }
+
+  &.animate > .sp-cell {
     transition: flex-basis 0.2s ease-out;
   }
 
   &.grow {
-    .sp-cell {
+    > .sp-cell {
       flex-grow: 1 !important;
     }
   }
@@ -42,7 +95,7 @@ $maxCells: 6;
   &.auto,
   &.cell-0,
   &.cell-auto {
-    .sp-cell {
+    > .sp-cell {
       flex-basis: 100%;
       flex-grow: 0;
 
@@ -60,7 +113,7 @@ $maxCells: 6;
       @if $media {
         &.#{$media}-#{$i},
         &.cell-#{$media}-#{$i} {
-          .sp-cell {
+          > .sp-cell {
             @include mediaUp($media) {
               flex-basis: calc(100% / #{$i});
               flex-grow: 0;
@@ -68,7 +121,7 @@ $maxCells: 6;
           }
         }
       } @else {
-        &.cell-#{$i} .sp-cell {
+        &.cell-#{$i} > .sp-cell {
           flex-basis: calc(100% / #{$i});
           flex-grow: 0;
         }
@@ -79,15 +132,13 @@ $maxCells: 6;
 
 .sp-cell {
   flex-grow: 1;
-  padding: var(--gutter-horizontal) var(--gutter-vertical) 0;
-  position: relative;
+  padding: var(--gutter) var(--gutter);
 
   &.animate {
     transition: flex-basis 0.2s ease-out;
   }
 
-  &.grow,
-  &.cell-grow {
+  &.grow {
     flex-grow: 1 !important;
   }
 
